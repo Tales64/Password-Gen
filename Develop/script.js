@@ -7,18 +7,13 @@ var symbols = ["!","@","#","$","%","&","*","?","-",""];
 var catagories = ["passLength","upperCaseLetterConfirm","LowerCaseLetterConfirm","numberConfirm","symbolConfirm"]
 var generateBtn = document.querySelector("#generate");
 // Choose number of chacters 8-128
-var passLength = window.prompt("How many characters would you like the password to be between 8-128?");
-var upperCaseLetterConfirm = window.confirm("Would you like Uppercase letters?");
-var lowerCaseLetterConfirm = window.confirm("Would you like Lowercase letters?");
-var numberConfirm = window.confirm("Would you like Numbers?");
-var symbolConfirm = window.confirm("Would you like symbols?");
 var newPassword = []
 var index = []
 
 function randomChoice(x){
-   index = Math.floor(Math.random() * x.length);
-   newPassword += x[index];
-   console.log(newPassword);
+  index = Math.floor(Math.random() * x.length);
+  newPassword += x[index];
+  console.log(newPassword);
 }
 // Create a confirm to start making password 
 
@@ -26,7 +21,22 @@ function randomChoice(x){
 
 
 //Create a function that will collect and add all the parts together
-var chooseCharacter = function(){
+var generatePassword = function(){
+  var hello = window.confirm ("Would you like to make a new password?")
+  
+  //  dont know if this is the right thing to use
+  if (hello === true){
+    var passLength = window.prompt("How many characters do you want your password to be? (Must be between 8-128)");
+    if (passLength < 8 || passLength > 128){
+      passLength = window.prompt("How many characters do you want your password to be? (Must be between 8-128)");
+    }
+  console.log(hello)
+  console.log(passLength)
+  }
+  var upperCaseLetterConfirm = window.confirm("Would you like Uppercase letters?");
+  var lowerCaseLetterConfirm = window.confirm("Would you like Lowercase letters?");
+  var numberConfirm = window.confirm("Would you like Numbers?");
+  var symbolConfirm = window.confirm("Would you like symbols?");
 for (let i = 0; i < passLength; i++) {
   if (upperCaseLetterConfirm === true){
     randomChoice(upperCase)
@@ -56,18 +66,20 @@ break;
   if (newPassword.length -- >= passLength){
 break;
   }
-}}
+}
+newPassword
+}
 
 // Write password to the #password input
-
+console.log(newPassword)
 function writePassword() {
-  var password = generatePassword();
+  generatePassword();
   var passwordText = document.querySelector("#password");
 
-  passwordText.value = password;
+  passwordText.value = newPassword;
 
 }
 
 // Add event listener to generate button
-chooseCharacter()
+
 generateBtn.addEventListener("click", writePassword);
